@@ -1,0 +1,14 @@
+require 'csv'
+
+module ToiletsHelper
+  def uploadCSV(filename)
+	puts(Toilet.table_name)
+	
+	#csv_text = File.read("vendor/assets/toiletdbs/" + filename)
+	#csv = CSV.parse(csv_text, :headers => true)
+	#csv.each do |row|
+	  #puts(row)
+	#end
+
+  end
+end

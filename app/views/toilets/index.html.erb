@@ -1,0 +1,22 @@
+<h1>Toilets are HERE</h1>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>X</th>
+		<th>Y</th>
+		<th>CHARGE</th>
+		<th>ADDRESS</th>
+	</tr>
+	
+	<% @toilets.each do |toilet| %>
+	<tr>
+		<td><%= toilet.id %></td>
+		<td><%= toilet.x %></td>
+		<td><%= toilet.y %></td>
+		<td><%= toilet.chargeAmount %></td>
+		<td><%= toilet.streetAddress %></td>
+	</tr>
+	<% end %>
+	
+</table>
