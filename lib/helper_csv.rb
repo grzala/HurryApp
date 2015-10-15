@@ -1,7 +1,7 @@
 require 'csv'
 
-module ToiletsHelper
-  def uploadCSV(filename)
+module Helper_CSV
+def uploadCSV(filename)
     @column_names = [] 
 	Toilet.columns.map {|c| @column_names.push(c.name.to_sym) }
 	#1st is ID, omit it
