@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #map {
-    margin: auto;
     width: 400px;
     height: 350px;
 }

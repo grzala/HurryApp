@@ -13,8 +13,8 @@ class CreateToilets < ActiveRecord::Migration
       t.string :organisationLabel
       t.string :serviceTypeUrl
       t.string :serviceTypeLabel
-      t.string :coordinateReferenceSystem
       t.string :locationText
+      t.string :coordinateReferenceSystem
       t.float :geoX
       t.float :geoY
       t.string :geoPointLicensingUrl

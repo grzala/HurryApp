@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014184711) do
+ActiveRecord::Schema.define(version: 20151018194327) do
 
   create_table "toilets", force: :cascade do |t|
     t.float    "x"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20151014184711) do
     t.string   "organisationLabel"
     t.string   "serviceTypeUrl"
     t.string   "serviceTypeLabel"
-    t.string   "coordinateReferenceSystem"
     t.string   "locationText"
+    t.string   "coordinateReferenceSystem"
     t.float    "geoX"
     t.float    "geoY"
     t.string   "geoPointLicensingUrl"
