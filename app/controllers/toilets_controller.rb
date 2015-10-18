@@ -7,14 +7,10 @@ class ToiletsController < ApplicationController
 	@coordinates = []
 	
 	@toilets.each do |toilet| 
-		@X = toilet.geoX
-		@Y = toilet.geoY
-		
-		if toilet.coordinateReferenceSystem.upcase == "OSGB36"
-			
-		end
+		@X = toilet.geox
+		@Y = toilet.geoy
 	
-		@coordinates.push(Hash[:lat => @Y, :lng => @X, :ref => toilet.coordinateReferenceSystem.upcase]) 
+		@coordinates.push(Hash[:lat => @Y, :lng => @X, :ref => toilet.coordinatereferencesystem]) 
 	end
 	
   end
