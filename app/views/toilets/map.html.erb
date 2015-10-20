@@ -68,44 +68,53 @@
 
 <script type="text/javascript">
 		var map;
+      
 		//Create google map
 		function initMap() {
 		  map = new google.maps.Map(document.getElementById('map-canvas'), {
 			center: {lat: 53.0, lng: -1.0 },
 			zoom: 6
-		  });
-		  
-		  var osgb; var wgs84; var latitude; var longitude;
-		  
-		<% @coordinates.each do |c| %>
-			latitude = <%= c[:lat] %>; longitude = <%= c[:lng] %>;
-			<% if c[:ref] == "OSGB36" %>
-			
-				//convert to WGS84
-				
-				osgb=new GT_OSGB();
-				osgb.setGridCoordinates(<%= c[:lng] %>, <%= c[:lat] %>);
-				wgs84 = osgb.getWGS84();		
-				latitude = wgs84.latitude; longitude = wgs84.longitude;
-			<% end %>
-			
-			//set marker at toilet location
-			var marker = new google.maps.Marker({
-				position: {lat: latitude, lng: longitude },
-				map: map
-			});
-			
-		<% end %>
+  	  });
+  	  
+  	  
+  		var toilets;
+  		$.ajax({
+            type: "GET",
+            url: "/toilets/get_json_all",
+            dataType: "json",
+            success: function(alltoilets){
+              var len = alltoilets.toilets.length;
+              for (var i = 0; i < len; i++) {
+                var x = alltoilets.toilets[i].geox;
+                var y = alltoilets.toilets[i].geoy;
+                var ref = alltoilets.toilets[i].coordinatereferencesystem;
+                if (ref == "OSGB36") {
+                    	osgb=new GT_OSGB();
+                    	osgb.setGridCoordinates(x, y);
+                    	wgs84 = osgb.getWGS84();		
+                    	y = wgs84.latitude; x = wgs84.longitude;
+                }
+                if (x != null && y != null) {
+                  var marker = new google.maps.Marker({
+                  	position: {lat: y, lng: x },
+                  	map: map
+                  });
+                }
+              }
+            }       
+        });
 		}
-
+  
+  $(document).ready(function() {
 		// W3C Browser Location
-		if(navigator.geolocation) {
-		browserSupportFlag = true;
-		navigator.geolocation.getCurrentPosition(function(position) {			
-		  initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		  map.setCenter(initialLocation);
-		}, function() {});
-		}
-
+    if(navigator.geolocation) {
+      browserSupportFlag = true;
+      navigator.geolocation.getCurrentPosition(function(position) {			
+        initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        map.setCenter(initialLocation);
+      }, function() {});
+    }
+    
+  });
 	</script>
 	

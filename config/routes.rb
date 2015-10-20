@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'toilets/map' => 'toilets#map'
+  get 'toilets/get_json_all' => 'toilets$get_json_all'
   resources :toilets
 
   # The priority is based upon order of creation: first created -> highest priority.
