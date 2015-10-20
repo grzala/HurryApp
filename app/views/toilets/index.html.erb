@@ -11,7 +11,7 @@
 	
 	<% @toilets.each do |toilet| %>
 	<tr>
-		<td><%= toilet.id %></td>
+		<td><%= link_to toilet.id, toilet_path(toilet) %></td>
 		<td><%= toilet.geox %></td>
 		<td><%= toilet.geoy %></td>
 		<td><%= toilet.chargeamount %></td>

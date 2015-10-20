@@ -20,21 +20,21 @@ ActiveRecord::Schema.define(version: 20151018194327) do
     t.string   "coordinatereferencesystem", default: "WGS84"
     t.float    "geox"
     t.float    "geoy"
-    t.string   "category",                  default: "Unknown"
-    t.string   "babychange",                default: "Unknown"
-    t.string   "familytoilet",              default: "Unknown"
-    t.string   "changingplace",             default: "Unknown"
-    t.string   "fulltimestaffing",          default: "Unknown"
-    t.string   "chargeamount",              default: "Unknown"
-    t.string   "openinghours",              default: "Unknown"
-    t.string   "managedby",                 default: "Unknown"
+    t.string   "category"
+    t.string   "babychange"
+    t.string   "familytoilet"
+    t.string   "changingplace"
+    t.string   "fulltimestaffing"
+    t.string   "chargeamount"
+    t.string   "openinghours"
+    t.string   "managedby"
     t.string   "reportemail"
     t.string   "reporttel"
     t.string   "postcode"
     t.string   "streetaddress"
     t.string   "radarkeyneeded"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
 end

@@ -1,0 +1,72 @@
+<div id="map"><div id="map-canvas">
+	<script type="text/javascript">
+		var map;
+		//Create google map
+		function initMap() {
+		  map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 53.0, lng: -1.0 },
+			zoom: 6
+		  });
+		  
+		  var osgb; var wgs84; var latitude; var longitude;
+		
+		latitude = <%= @coordinates[:lat] %>; longitude = <%= @coordinates[:lng] %>;
+		<% if @coordinates[:ref] == "OSGB36" %>
+		
+			//convert to WGS84
+			
+			osgb=new GT_OSGB();
+			osgb.setGridCoordinates(<%= @coordinates[:lng] %>, <%= @coordinates[:lat] %>);
+			wgs84 = osgb.getWGS84();		
+			latitude = wgs84.latitude; longitude = wgs84.longitude;
+		<% end %>
+		
+		//set marker at toilet location
+		var marker = new google.maps.Marker({
+			position: {lat: latitude, lng: longitude },
+			map: map
+		});
+			
+		}
+
+		// W3C Browser Location
+		if(navigator.geolocation) {
+		browserSupportFlag = true;
+		navigator.geolocation.getCurrentPosition(function(position) {			
+		  initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		  map.setCenter(initialLocation);
+		}, function() {});
+		}
+
+	</script>
+</div></div>
+
+<ul>
+	<% @information.each do |key, value| %>
+		<% if value != nil %>
+			<li><%= key %><%= value %></li>
+		<% end %>
+	<% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- GOOGLE MAPS -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrwi8Uo3FnFtArv67k4sxWbTNz6kGN24&callback=initMap"></script>
+<!-- GOOGLE MAPS -->
