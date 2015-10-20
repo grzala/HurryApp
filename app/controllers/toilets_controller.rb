@@ -7,10 +7,12 @@ class ToiletsController < ApplicationController
 	@coordinates = []
 	
 	@toilets.each do |toilet| 
-		@X = toilet.geox
-		@Y = toilet.geoy
-	
-		@coordinates.push(Hash[:lat => @Y, :lng => @X, :ref => toilet.coordinatereferencesystem]) 
+		if(toilet.geox != nil && toilet.geoy != nil && toilet.geox != "" && toilet.geoy != "")
+			@X = toilet.geox
+			@Y = toilet.geoy
+		
+			@coordinates.push(Hash[:lat => @Y, :lng => @X, :ref => toilet.coordinatereferencesystem]) 
+		end
 	end
 	
   end

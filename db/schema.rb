@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20151018194327) do
     t.string   "reporttel"
     t.string   "postcode"
     t.string   "streetaddress"
+    t.string   "radarkeyneeded"
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end

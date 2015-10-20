@@ -28,4 +28,12 @@ def uploadCSV(filename)
 	puts "Database updated"
 	
   end
+  def uploadAllCSV #upload all
+	Dir.new('vendor/assets/toiletdbs/').each do|file| 
+		if(file && file != "." && file != "..")
+			puts "Working on " + file
+			uploadCSV(file)
+		end
+	end
+  end
 end

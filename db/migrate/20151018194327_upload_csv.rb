@@ -4,9 +4,6 @@ include Helper_CSV
 
 class UploadCsv < ActiveRecord::Migration
   def change
-     uploadCSV("York.csv")
-     uploadCSV("Bolton.csv")
-     uploadCSV("Scarborough.csv")
-     uploadCSV("Leeds.csv")
+     uploadAllCSV
   end
 end
