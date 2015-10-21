@@ -10,6 +10,11 @@ class ToiletsController < ApplicationController
 		@toilets = Toilet.all
 		render json: {:toilets => @toilets}
 	end
+	
+	def get_json_id
+		@toilet = Toilet.find(params[:id])
+		render json: @toilet
+	end
   
 	def show
 		@toilet = Toilet.find(params[:id])
