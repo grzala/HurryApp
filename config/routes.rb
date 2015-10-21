@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :users
+
   get 'toilets/map' => 'toilets#map'
   get 'toilets/get_json_all' => 'toilets#get_json_all'
   get 'toilets/get_json_id/:id' => 'toilets#get_json_id'
