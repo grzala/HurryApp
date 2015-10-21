@@ -3,15 +3,18 @@
 </div>
 
 
-<!-- present toilet information -->
-<ul>
-	<% @information.each do |key, value| %>
-		<% if value != nil %>
-			<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
+<div class="container-fluid" id="main">
+<div class="information">
+	<!-- present toilet information -->
+	<ul>
+		<% @information.each do |key, value| %>
+			<% if value != nil %>
+				<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
+			<% end %>
 		<% end %>
-	<% end %>
-</ul>
-
+	</ul>
+</div>
+</div>
 
 <%= javascript_tag do %>
   window.toiletid = "<%= params[:id] %>";
