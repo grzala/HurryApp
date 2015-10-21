@@ -4,16 +4,29 @@
 
 
 <div class="container-fluid" id="main">
-<div class="information">
-	<!-- present toilet information -->
-	<ul>
-		<% @information.each do |key, value| %>
-			<% if value != nil %>
-				<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
+	<div class="row">
+	<div class="col-xs-8" id="left">
+	
+		<h2>Toilet at <%= @toilet.streetaddress %></h2>
+		
+		<!-- item list -->
+		<div class="panel panel-default">
+			<div class="panel-heading">Toilet Information</div>
+		</div>
+		
+		<p>
+			<ul>
+			<% @information.each do |key, value| %>
+				<% if value != nil %>
+					<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
+				<% end %>
 			<% end %>
-		<% end %>
-	</ul>
-</div>
+			</ul>
+		</p>
+		
+		<h2>Comments</h2><!--add comments below -->
+	</div>
+	</div>
 </div>
 
 <%= javascript_tag do %>
