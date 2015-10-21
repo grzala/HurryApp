@@ -105,6 +105,7 @@
                 	title:title
                 });
                 
+                
                 //get information for info window
                 var information = {
               			"City: ": alltoilets.toilets[i].organisationlabel,
@@ -162,8 +163,13 @@
     if(navigator.geolocation) {
       browserSupportFlag = true;
       navigator.geolocation.getCurrentPosition(function(position) {			
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(initialLocation);
+      var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      map.setCenter(location);
+      var marker = new google.maps.Marker({
+      	position: location,
+      	map: map,
+      	icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
     }, function() {});
     }
   });
