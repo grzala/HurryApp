@@ -7,7 +7,7 @@
 <ul>
 	<% @information.each do |key, value| %>
 		<% if value != nil %>
-			<li><%= key %><%= value.capitalize %></li>
+			<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
 		<% end %>
 	<% end %>
 </ul>
