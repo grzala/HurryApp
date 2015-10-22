@@ -34,51 +34,84 @@
 <% end %>
 <script type="text/javascript">
 	function initMap() {
+		var directionsService = new google.maps.DirectionsService;
+  		var directionsDisplay = new google.maps.DirectionsRenderer;
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
 			center: {lat: 53.0, lng: -1.0 },
 			zoom: 6
 		});
-  	  
+  	  	directionsDisplay.setMap(map);
+  	  	
 		$.ajax({
 			type: "GET",
 			url: "/toilets/get_json_id/" + toiletid,
 			dataType: "json",
-			success: function(toilet){
-				var x = toilet.geox;
-				var y = toilet.geoy;
-				var ref = toilet.coordinatereferencesystem;
-				if (ref == "OSGB36") {
-					osgb=new GT_OSGB();
-					osgb.setGridCoordinates(x, y);
-					wgs84 = osgb.getWGS84();		
-					y = wgs84.latitude; x = wgs84.longitude;
-				}
-				if (x != null && y != null) {
-					var marker = new google.maps.Marker({
-						position: {lat: y, lng: x },
-						map: map
-					});
-					map.setCenter({lat: y, lng: x });
-				} else {
-					console.log("NO COORDINATES");
-				}     
+			success: function(toilet) {
+				var toiletPos = setMarkers(toilet, map);
+				findCurrentPositionAndCreateRoute(map, toiletPos, directionsService, directionsDisplay);
 			}
 		});
 		
+		
+	}
+	
+	//set the markers
+	function setMarkers(toilet, map){
+		var x = toilet.geox;
+		var y = toilet.geoy;
+		var ref = toilet.coordinatereferencesystem;
+		if (ref == "OSGB36") {
+			osgb=new GT_OSGB();
+			osgb.setGridCoordinates(x, y);
+			wgs84 = osgb.getWGS84();		
+			y = wgs84.latitude; x = wgs84.longitude;
+		}
+		if (x != null && y != null) {
+			var marker = new google.maps.Marker({
+				position: {lat: y, lng: x },
+				map: map
+			});
+			map.setCenter({lat: y, lng: x });
+			var pos = {lat: y, lng: x};
+			return pos;
+		} else {
+			console.log("NO COORDINATES");
+		}     
+	}
+	
+	//find position and then create route
+	function findCurrentPositionAndCreateRoute(map, toiletPos, directionsService, directionsDisplay) {
 		// W3C Browser Location
+		var pos;
 	    if(navigator.geolocation) {
 	      browserSupportFlag = true;
 	      navigator.geolocation.getCurrentPosition(function(position) {			
 	      var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	      pos = {lat: position.coords.latitude, lng: position.coords.longitude};
 	      var marker = new google.maps.Marker({
 	      	position: location,
 	      	map: map,
 	      	icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 	      });
-	    }, function() {});
+	      createRoute(map, toiletPos, pos, directionsService, directionsDisplay)
+	    }, function() { console.log("Cannot find position")});
 	    }
 	}
-
+	
+	//create route
+	function createRoute(map, toiletPos, currentPos, directionsService, directionsDisplay) {
+	 directionsService.route({
+	    origin: currentPos,
+	    destination: toiletPos,
+	    travelMode: google.maps.TravelMode.WALKING
+	  }, function(response, status) {
+	    if (status === google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    } else {
+	      console.log("directions failed");
+	    }
+	  });
+	}
 </script>
 
 

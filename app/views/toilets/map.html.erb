@@ -81,83 +81,90 @@
           url: "/toilets/get_json_all",
           dataType: "json",
           success: function(alltoilets){
-            var len = alltoilets.toilets.length;
-            for (var i = 0; i < len; i++) { //initialize markers
-              var id = alltoilets.toilets[i].id;
-              var x = alltoilets.toilets[i].geox;
-              var y = alltoilets.toilets[i].geoy;
-              var ref = alltoilets.toilets[i].coordinatereferencesystem;
-              var title = "Toilet at " + alltoilets.toilets[i].streetaddress
-              if (alltoilets.toilets[i].streetaddress == null) {
-                var title = "Toilet";
-              }
-              
-              if (ref == "OSGB36") {
-                  	osgb=new GT_OSGB();
-                  	osgb.setGridCoordinates(x, y);
-                  	wgs84 = osgb.getWGS84();		
-                  	y = wgs84.latitude; x = wgs84.longitude;
-              }
-              if (x != null && y != null) {
-                var marker = new google.maps.Marker({
-                	position: {lat: y, lng: x },
-                	map: map,
-                	title:title
-                });
-                
-                
-                //get information for info window
-                var information = {
-              			"City: ": alltoilets.toilets[i].organisationlabel,
-              			"Location: ": alltoilets.toilets[i].locationtext,
-              			"Street: ": alltoilets.toilets[i].streetaddress,
-              			"Category: ": alltoilets.toilets[i].category,
-              			"Baby Change: ": alltoilets.toilets[i].babychange,
-              			"Charge: ": alltoilets.toilets[i].chargeamount,
-              			"Hours: ": alltoilets.toilets[i].openinghours,
-              			"Report Email: ": alltoilets.toilets[i].reportemail,
-              			"Is RadayKey needed?: ": alltoilets.toilets[i].radarkeyneeded
-              		}
-                
-                //generate info window string
-                var content = '<div id="content">'+
-                '<div id="siteNotice">'+
-                '</div>'+
-                '<h4 id="firstHeading" class="firstHeading"><a class="info-window-title" href="/toilets/' + id + '">' + title + '</a></h4>'+
-                '<div id="bodyContent"> <ul>';
-                
-                for (key in information) {
-                  var value = information[key];
-                  if (value != null && key != "Report Email: ") {
-                    value.replace(value[0], value[0].toUpperCase());
-                  }
-                  if (key !=  null && value != null) content += "<li>" + key + value + "</li>"
-                }
-               
-                content += '</ul> ' +
-                '<a href="/toilets/' + id + '"> Click here to read more </a>' +
-                '</div></div>';
-              }
-              //create info window
-              var infowindow = new google.maps.InfoWindow({
-                content: content,
-                maxWidth: 300, 
-                pixelOffset: 0
-              });
-              var lastwindow; //auto-close
-              google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ //marker clicked
-                  return function() {
-                      if(lastwindow) lastwindow.close();
-                      infowindow.setContent(content);
-                      infowindow.open(map,marker);
-                      lastwindow = infowindow;
-                  };
-              })(marker,content,infowindow));  
-            }
-          }       
+            setMarkers(alltoilets, map);
+            setCurrentPosition(map);
+          }      
       });
-      
-       // W3C Browser Location
+		}
+		
+    function setMarkers(alltoilets, map) {
+      var len = alltoilets.toilets.length;
+      for (var i = 0; i < len; i++) { //initialize markers
+        var id = alltoilets.toilets[i].id;
+        var x = alltoilets.toilets[i].geox;
+        var y = alltoilets.toilets[i].geoy;
+        var ref = alltoilets.toilets[i].coordinatereferencesystem;
+        var title = "Toilet at " + alltoilets.toilets[i].streetaddress
+        if (alltoilets.toilets[i].streetaddress == null) {
+          var title = "Toilet";
+        }
+        
+        if (ref == "OSGB36") {
+            	osgb=new GT_OSGB();
+            	osgb.setGridCoordinates(x, y);
+            	wgs84 = osgb.getWGS84();		
+            	y = wgs84.latitude; x = wgs84.longitude;
+        }
+        if (x != null && y != null) {
+          var marker = new google.maps.Marker({
+          	position: {lat: y, lng: x },
+          	map: map,
+          	title:title
+          });
+          
+          
+          //get information for info window
+          var information = {
+        			"City: ": alltoilets.toilets[i].organisationlabel,
+        			"Location: ": alltoilets.toilets[i].locationtext,
+        			"Street: ": alltoilets.toilets[i].streetaddress,
+        			"Category: ": alltoilets.toilets[i].category,
+        			"Baby Change: ": alltoilets.toilets[i].babychange,
+        			"Charge: ": alltoilets.toilets[i].chargeamount,
+        			"Hours: ": alltoilets.toilets[i].openinghours,
+        			"Report Email: ": alltoilets.toilets[i].reportemail,
+        			"Is RadayKey needed?: ": alltoilets.toilets[i].radarkeyneeded
+        		}
+          
+          //generate info window string
+          var content = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h4 id="firstHeading" class="firstHeading"><a class="info-window-title" href="/toilets/' + id + '">' + title + '</a></h4>'+
+          '<div id="bodyContent"> <ul>';
+          
+          for (key in information) {
+            var value = information[key];
+            if (value != null && key != "Report Email: ") {
+              value.replace(value[0], value[0].toUpperCase());
+            }
+            if (key !=  null && value != null) content += "<li>" + key + value + "</li>"
+          }
+         
+          content += '</ul> ' +
+          '<a href="/toilets/' + id + '"> Click here to read more </a>' +
+          '</div></div>';
+        }
+        //create info window
+        var infowindow = new google.maps.InfoWindow({
+          content: content,
+          maxWidth: 300, 
+          pixelOffset: 0
+        });
+        var lastwindow; //auto-close
+        google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ //marker clicked
+            return function() {
+                if(lastwindow) lastwindow.close();
+                infowindow.setContent(content);
+                infowindow.open(map,marker);
+                lastwindow = infowindow;
+            };
+        })(marker,content,infowindow));  
+      }
+    }
+    
+    function setCurrentPosition(map) {
+      // W3C Browser Location
       if(navigator.geolocation) {
         browserSupportFlag = true;
         navigator.geolocation.getCurrentPosition(function(position) {			
@@ -170,8 +177,7 @@
         });
       }, function() {});
       }
-      
-		}
+    }
 </script>
 	
 	
