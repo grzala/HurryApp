@@ -65,6 +65,21 @@
 			}
 		});
 	}
+	
+	$(document).ready(function() {
+    // W3C Browser Location
+    if(navigator.geolocation) {
+      browserSupportFlag = true;
+      navigator.geolocation.getCurrentPosition(function(position) {			
+      var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      var marker = new google.maps.Marker({
+      	position: location,
+      	map: map,
+      	icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
+    }, function() {});
+    }
+ 	});
 
 </script>
 
