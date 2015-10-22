@@ -156,24 +156,23 @@
             }
           }       
       });
+      
+       // W3C Browser Location
+      if(navigator.geolocation) {
+        browserSupportFlag = true;
+        navigator.geolocation.getCurrentPosition(function(position) {			
+        var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        map.setCenter(location);
+        var marker = new google.maps.Marker({
+        	position: location,
+        	map: map,
+        	icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        });
+      }, function() {});
+      }
+      
 		}
-
-  $(document).ready(function() {
-    // W3C Browser Location
-    if(navigator.geolocation) {
-      browserSupportFlag = true;
-      navigator.geolocation.getCurrentPosition(function(position) {			
-      var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(location);
-      var marker = new google.maps.Marker({
-      	position: location,
-      	map: map,
-      	icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      });
-    }, function() {});
-    }
-  });
-	</script>
+</script>
 	
 	
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrwi8Uo3FnFtArv67k4sxWbTNz6kGN24&callback=initMap"></script>
