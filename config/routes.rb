@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
   resources :users
-
+  
+  resources :entries, defaults: { format: 'js' }
+  
   get 'toilets/map' => 'toilets#map'
   get 'toilets/get_json_all' => 'toilets#get_json_all'
   get 'toilets/get_json_id/:id' => 'toilets#get_json_id'
-  resources :toilets
+  get 'toilets/closest' => 'toilets#closest'
+  resources :toilets 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

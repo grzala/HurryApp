@@ -5,6 +5,8 @@ class ToiletsController < ApplicationController
 	def map
 		@toilets = Toilet.all
 	end
+	def closest
+	end
 	
 	def get_json_all
 		@toilets = Toilet.all

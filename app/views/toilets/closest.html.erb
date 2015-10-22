@@ -1,0 +1,72 @@
+calculating data...
+<script type="text/javascript">
+
+    function initMap(){
+        
+        if(navigator.geolocation) {
+            browserSupportFlag = true;
+            navigator.geolocation.getCurrentPosition(function(position) {			
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                getToilets(pos);
+            }, function() {alert("error")});
+        };
+    }
+    
+    function getToilets(myPos) {
+        $.ajax({
+            type: "GET",
+            url: "/toilets/get_json_all",
+            dataType: "json",
+            success: function(alltoilets){
+                getClosestToilet(myPos, alltoilets);
+            }      
+        });
+    }
+    
+    function getClosestToilet(myPos, alltoilets) {
+        var len = alltoilets.toilets.length;
+        var distance = Number.MAX_VALUE;
+        var targetId = null;
+        for (var i = 0; i < len; i++) { //initialize markers
+            var id = alltoilets.toilets[i].id;
+            var x = alltoilets.toilets[i].geox;
+            var y = alltoilets.toilets[i].geoy;
+            var ref = alltoilets.toilets[i].coordinatereferencesystem;
+            
+            if (ref == "OSGB36") {
+            osgb=new GT_OSGB();
+            osgb.setGridCoordinates(x, y);
+            wgs84 = osgb.getWGS84();		
+            y = wgs84.latitude; x = wgs84.longitude;
+            }
+            var toiletPos = {lat: y, lng: x};
+            
+            //calculate distance
+            //haversine algorithm
+            var earthRadius = 6371; // earth radius kilometers
+            var a = myPos.lat*Math.PI/180;
+            var b = toiletPos.lat*Math.PI/180;
+            var delta = (toiletPos.lat - myPos.lat)*Math.PI/180;
+            var delta2 = (toiletPos.lng - myPos.lng)*Math.PI/180;
+            
+            var p = Math.sin(delta/2) * Math.sin(delta/2) +
+                    Math.cos(a) * Math.cos(b) *
+                    Math.sin(delta2/2) * Math.sin(delta2/2);
+            var q = 2 * Math.atan2(Math.sqrt(p), Math.sqrt(1-p));
+            
+            var d = earthRadius * q;
+            if (distance > d) {
+                distance = d;
+                targetId = id;
+            }
+        }
+        console.log(distance);
+        window.location.replace("/toilets/" + targetId);
+    }
+    
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrwi8Uo3FnFtArv67k4sxWbTNz6kGN24&callback=initMap"></script>
