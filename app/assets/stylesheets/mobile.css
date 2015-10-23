@@ -73,3 +73,11 @@ body{
     color: black;
     background-color: white;
 }
+
+#facebook-icon {
+    margin-left: 5%;
+}
+
+#user-name {
+    margin-top: 16px;
+}

@@ -19,13 +19,18 @@
   
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <%= csrf_meta_tags %>
 </head>
 <body>
   
 <div class="navbar navbar-custom navbar-fixed-top">
- <div class="navbar-header"><%= link_to "HurryApp", root_url, {:class => "navbar-brand"} %></a>
+ <div class="navbar-header">
+   <i class="fa fa-male fa-3x"></i>
+   <i class="fa fa-map-signs fa-2x"></i>
+   <i class="fa fa-female fa-3x"></i>
+   <a href="#"><i class="fa fa-facebook-square fa-3x" id="facebook-icon"></i></a>
+     <%= link_to "HurryApp", root_url, {:class => "navbar-brand"} %>
       <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -34,29 +39,20 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <li class="active"><a href="/toilets/closest"><i class="fa fa-map-signs"></i> Nearest toilet</a></li>
+        <% if session[:user_id].nil? %>
+        <li><%= link_to_if(@current_user.nil?, '<i class="fa fa-sign-in"></i> Log In'.html_safe, { controller: "sessions", action: "create" }) %></li>
+        <% end %>
+        <% unless session[:user_id].nil? %>
+        <li class="active" id="user-name"><i class="fa fa-hand-peace-o"></i>Hello <%= session[:user_name] %></li>
+        <li>&nbsp;</li>
+        <li><%= link_to '<i class="fa fa-sign-out"></i> Log Out'.html_safe, logout_path, :method => :delete, data: {confirm: "Are you sure?"} %></li>
+        <% end %>
+        <% if session[:user_id].nil? %>
+        <li class="active"><%= link_to_if(@current_user.nil?, '<i class="fa fa-pencil"></i> Register'.html_safe, { controller: "users", action: "new" }) %></li>
+        <% end %>
         <li>&nbsp;</li>
       </ul>
-      <form class="navbar-form">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Category 1</a></li>
-                <li><a href="#">Category 2</a></li>
-                <li><a href="#">Category 3</a></li>
-                <li><a href="#">Category 4</a></li>
-                <li><a href="#">Category 5</a></li> 
-              </ul>
-            </div>
-            <input type="text" class="form-control" placeholder="What are searching for?">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-          </div>
-        </div>
-      </form>
     </div>
 </div>
 
