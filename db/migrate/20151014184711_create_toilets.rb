@@ -20,6 +20,7 @@ class CreateToilets < ActiveRecord::Migration
       t.string :postcode
       t.string :streetaddress
       t.string :radarkeyneeded 
+      t.integer :rating, :default => 0
 
       t.timestamps null: false
     end

@@ -19,6 +19,7 @@
 					<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
 				<% end %>
 			<% end %>
+			<li><span id="rating"><%= @toilet.rating %></span> <a class="rate" id="up">up</a> <a class="rate" id="down">down</a></li>
 			</ul>
 		</p>
 		
@@ -30,7 +31,35 @@
 <%= javascript_tag do %>
   window.toiletid = "<%= params[:id] %>";
 <% end %>
+
+
 <script type="text/javascript">
+	//rating
+	$(document).ready(function() {
+		$("#up").click(function(){
+			$.ajax({
+				type: "GET",
+				url: "/toilets/" + toiletid + "/up",
+				dataType: "json",
+				success: function(toilet) {
+					$("#rating").text(toilet.rating);
+				}
+			});
+		});
+		$("#down").click(function(){
+			$.ajax({
+				type: "GET",
+				url: "/toilets/" + toiletid + "/down",
+				dataType: "json",
+				success: function(toilet) {
+					$("#rating").text(toilet.rating);
+				}
+			});
+		});
+
+	});
+
+	//google API
 	function initMap() {
 		var directionsService = new google.maps.DirectionsService;
   		var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});

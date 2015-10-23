@@ -39,4 +39,17 @@ class ToiletsController < ApplicationController
 			@coordinates = (Hash[:lat => @Y, :lng => @X, :ref => @toilet.coordinatereferencesystem]) 
 		end
 	end
+	
+	def rate
+		
+		@toilet = Toilet.find(params[:id])
+		if params[:rate] == "up"
+			@toilet.rating = @toilet.rating + 1
+		elsif params[:rate] == "down"
+			@toilet.rating = @toilet.rating - 1
+		end
+		@toilet.save
+		
+		render json: @toilet
+	end
 end

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20151021132005) do
     t.string   "postcode"
     t.string   "streetaddress"
     t.string   "radarkeyneeded"
+    t.integer  "rating",                    default: 0
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
