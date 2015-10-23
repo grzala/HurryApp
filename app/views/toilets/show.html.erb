@@ -46,6 +46,7 @@
 			dataType: "json",
 			success: function(toilet) {
 				var toiletPos = setMarkers(toilet, map);
+				map.setCenter(toiletPos);
 				findCurrentPositionAndCreateRoute(map, toiletPos, directionsService, directionsDisplay);
 			}
 		});
