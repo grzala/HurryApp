@@ -1,12 +1,10 @@
-<div id="map-canvas">
-	
-</div>
+<div id="map-canvas"></div>
 
-
-<div class="container-fluid" id="main">
-	<div class="row">
-	<div class="col-xs-8" id="left">
-	
+<% unless mobile? %>
+<div class="container-fluid" id="main"><div class="row"><div class="col-xs-6" id="left">
+<%else%>
+<div class="col-xs-12" id="down"><div><div>
+<% end%>
 		<h2>Toilet at <%= @toilet.streetaddress %></h2>
 		
 		<!-- item list -->
