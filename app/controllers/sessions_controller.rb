@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-	if user = User.authentication(params[:name], params[:password])
+	if user = User.authenticate(params[:name], params[:password])
 		session[:user_id] = user.id
 		redirect_to toilets_url
 	else
