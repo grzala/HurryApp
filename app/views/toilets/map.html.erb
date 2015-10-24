@@ -67,6 +67,9 @@
     
   </div>
 </div>
+<%= javascript_tag do %>
+  window.user_id = "<%= session[:user_id] %>";
+<% end %>
 
 <script type="text/javascript">
 		var map;
@@ -143,8 +146,11 @@
             if (key !=  null && value != null) content += "<li>" + key + value + "</li>"
           }
          
-          content += '</ul> ' +
-          '<a href="/toilets/' + id + '"> Click here to read more </a>' +
+          content += '</ul> ';
+          if (user_id) {
+           content += '<h5>Rating:&nbsp;&nbsp;' + alltoilets.toilets[i].rating + '</h5>';
+          }
+          content += '<a href="/toilets/' + id + '"> Click here to read more </a>' +
           '</div></div>';
         }
         //create info window

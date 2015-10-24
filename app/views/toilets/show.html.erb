@@ -19,10 +19,11 @@
 					<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
 				<% end %>
 			<% end %>
-			<li><span id="rating"><%= @toilet.rating %></span> <a class="rate" id="up">up</a> <a class="rate" id="down">down</a></li>
 			</ul>
 		</p>
-		
+		<% if !session[:user_id].nil? %>
+	    	<h2>Rating: <span id="rating"><%= @toilet.rating %></span><a class="rate" id="up">up</a> <a class="rate" id="down">down</a></h2>
+	    <% end %>
 		<h2>Comments</h2><!--add comments below -->
 	</div>
 	</div>
@@ -31,7 +32,6 @@
 <%= javascript_tag do %>
   window.toiletid = "<%= params[:id] %>";
 <% end %>
-
 
 <script type="text/javascript">
 	//rating
