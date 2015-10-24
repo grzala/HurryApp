@@ -24,7 +24,7 @@
 <% if !session[:user_id].nil? %>
    	<div class="panel panel-default">
    		<div class=" panel-heading">
-		   	<h4>Rating: <span id="rating"><%= @toilet.rating %></span></h4>
+		   	<h4>Rating: <span id="rating"><%= @toilet.upvotes - @toilet.downvotes %></span></h4>
 		</div>
 		<div class="panel-body">
 		   	<a class="rate" id="up">
@@ -63,7 +63,7 @@
 				url: "/toilets/" + toiletid + "/up",
 				dataType: "json",
 				success: function(toilet) {
-					$("#rating").text(toilet.rating);
+					$("#rating").text(toilet.upvotes - toilet.downvotes);
 				}
 			});
 		});
@@ -73,7 +73,7 @@
 				url: "/toilets/" + toiletid + "/down",
 				dataType: "json",
 				success: function(toilet) {
-					$("#rating").text(toilet.rating);
+					$("#rating").text(toilet.upvotes - toilet.downvotes);
 				}
 			});
 		});

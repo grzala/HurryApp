@@ -51,7 +51,6 @@ class ToiletsController < ApplicationController
 	end
 	
 	def rate
-		
 		@toilet = Toilet.find(params[:id])
 		respond_to do |format|
 			format.html { redirect_to(toilet_path(@toilet)) }
@@ -67,9 +66,9 @@ class ToiletsController < ApplicationController
 					end
 					if !@users_voted.include?(session[:user_id]) #has the user voted for this toilet?
 						if params[:rate] == "up"
-							@toilet.rating = @toilet.rating + 1
+							@toilet.upvotes = @toilet.upvotes + 1
 						elsif params[:rate] == "down"
-							@toilet.rating = @toilet.rating - 1
+							@toilet.downvotes = @toilet.downvotes + 1
 						end
 						@toilet.save
 						@v = Vote.new(:toilet_id => @toilet.id, :user_id => session[:user_id])
