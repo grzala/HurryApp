@@ -48,6 +48,9 @@ class ToiletsController < ApplicationController
 		
 			@coordinates = (Hash[:lat => @Y, :lng => @X, :ref => @toilet.coordinatereferencesystem]) 
 		end
+		
+		@comments = Comment.where(:toilet_id => @toilet.id)
+
 	end
 	
 	def rate

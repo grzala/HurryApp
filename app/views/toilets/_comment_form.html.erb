@@ -1,0 +1,11 @@
+<%= form_for(Comment.new) do |f| %>
+    <%= f.hidden_field :toilet_id, :value => @toilet.id %>
+    <%= f.hidden_field :user_id, :value => session[:user_id] %>
+    <%= f.hidden_field :date, :value => Time.now %>
+
+
+    <%= f.label(:message, :Comment) %><!-- id="message" -->
+    <%= text_area(:message, :body, cols: 50, rows: 5)  %> <!-- id="message_body" -->
+    <p>You have <span id="characters_left">300</span> characters left to use.</p>
+    <%= f.submit "Send", id: "comment_submit", :onclick => "return validateComment();" %><!-- id="comment_submit" -->
+<% end %>

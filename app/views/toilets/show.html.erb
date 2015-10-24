@@ -42,7 +42,17 @@
 		<h4>Comments</h4><!--add comments below -->
 	</div>
 	<div class="panel-body">
-		There will be comments
+		<p>There will be comments</p>
+		<% @comments.each do |comment| %>
+			<div class="comment">
+				<% @user = User.find(comment.user_id) %>
+				<p>Comment by: <%= @user.name %>, commented at: <%= comment.date %></p>
+				<p><%= comment.message %></p><br />
+			</div>
+		<% end %>
+		
+		
+		<%= render 'comment_form' %>
 	</div>
 </div>
 
@@ -55,8 +65,9 @@
 <% end %>
 
 <script type="text/javascript">
-	//rating
+	
 	$(document).ready(function() {
+		//rating
 		$("#up").click(function(){
 			$.ajax({
 				type: "GET",
@@ -77,7 +88,37 @@
 				}
 			});
 		});
+		//comments
+		$("#message_body").keyup(function(){
+			var max = 300;
+			var text = $("#message_body").val();
+			len  = text.length 
+			if (len > max) {
+				var newText = "";
+				for (var i = 0; i < max; i++) {
+					newText += text[i];
+				}
+				$("#message_body").val(newText);
+			}
+			$("#characters_left").text(max - $("#message_body").val().length);
+			
+		});
 	});
+	
+	$("#message_body").click(function(){
+		console.log($("#message_body").val().length);
+	});
+	
+	function validateComment() {
+		//validate contact length on submit
+		var max = 300;
+		var text = $("#message_body").val();
+		len = text.length
+		if (len > max || len == 0) {
+			alert("Comment too long or no comment");
+			return false;
+		}
+	}
 
 	//google API
 	function initMap() {

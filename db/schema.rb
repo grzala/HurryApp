@@ -14,9 +14,7 @@
 ActiveRecord::Schema.define(version: 20151024114011) do
 
   create_table "comments", force: :cascade do |t|
-    t.string   "belongs_to"
     t.integer  "toilet_id"
-    t.string   "has_one"
     t.integer  "user_id"
     t.string   "message"
     t.datetime "date"
