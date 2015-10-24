@@ -43,8 +43,9 @@ ActiveRecord::Schema.define(version: 20151021132005) do
     t.string   "email"
     t.string   "hashed_password"
     t.string   "salt"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end
