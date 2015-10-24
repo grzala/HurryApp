@@ -43,12 +43,26 @@ class ToiletsController < ApplicationController
 	def rate
 		
 		@toilet = Toilet.find(params[:id])
-		if params[:rate] == "up"
-			@toilet.rating = @toilet.rating + 1
-		elsif params[:rate] == "down"
-			@toilet.rating = @toilet.rating - 1
+		if !session[:user_id].nil?
+			
+			@votes = Vote.all
+			@users_voted = []
+			@votes.each do |vote|
+				if vote.toilet_id == @toilet.id
+					@users_voted << vote.user_id
+				end	
+			end
+			if !@users_voted.include?(session[:user_id])
+				if params[:rate] == "up"
+					@toilet.rating = @toilet.rating + 1
+				elsif params[:rate] == "down"
+					@toilet.rating = @toilet.rating - 1
+				end
+				@toilet.save
+				@v = Vote.new(:toilet_id => @toilet.id, :user_id => session[:user_id])
+				@v.save
+			end
 		end
-		@toilet.save
 		
 		render json: @toilet
 	end

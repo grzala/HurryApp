@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  toiletId_id: 1
+  userId_id: 1
+
+two:
+  toiletId_id: 1
+  userId_id: 1
