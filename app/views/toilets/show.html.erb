@@ -1,32 +1,53 @@
 <div id="map-canvas"></div>
 
 <% unless mobile? %>
-<div class="container-fluid" id="main"><div class="row"><div class="col-xs-6" id="left">
+	<div class="container-fluid" id="main"><div class="row"><div class="col-xs-6" id="left">
 <%else%>
-<div class="col-xs-12" id="down"><div><div>
-<% end%>
-		<h2>Toilet at <%= @toilet.streetaddress %></h2>
-		
-		<!-- item list -->
-		<div class="panel panel-default">
-			<div class="panel-heading">Toilet Information</div>
-		</div>
-		
-		<p>
-			<ul>
+	<div class="col-xs-12" id="down"><div><div>
+<% end %>
+<h3>Toilet at <%= @toilet.streetaddress %></h3>
+<!-- item list -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Toilet Information</h4>
+	</div>
+	<div class="panel-body">
+		<ul>
 			<% @information.each do |key, value| %>
 				<% if value != nil %>
 					<li><%= key %><%= key == "Report Email: " ? value : value.capitalize %></li>
 				<% end %>
 			<% end %>
-			</ul>
-		</p>
-		<% if !session[:user_id].nil? %>
-	    	<h2>Rating: <span id="rating"><%= @toilet.rating %></span><a class="rate" id="up">up</a> <a class="rate" id="down">down</a></h2>
-	    <% end %>
-		<h2>Comments</h2><!--add comments below -->
+		</ul>
 	</div>
+</div>
+<% if !session[:user_id].nil? %>
+   	<div class="panel panel-default">
+   		<div class=" panel-heading">
+		   	<h4>Rating: <span id="rating"><%= @toilet.rating %></span></h4>
+		</div>
+		<div class="panel-body">
+		   	<a class="rate" id="up">
+		   		<i class="fa fa-thumbs-o-up fa-3x"></i>
+		   	</a> 
+		   	There will be progressbar
+		   	<a class="rate" id="down">
+		   		<i class="fa fa-thumbs-o-down fa-3x"></i>
+		   	</a>
+		</div>
 	</div>
+<% end %>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Comments</h4><!--add comments below -->
+	</div>
+	<div class="panel-body">
+		There will be comments
+	</div>
+</div>
+
+</div>
+</div>
 </div>
 
 <%= javascript_tag do %>
