@@ -46,10 +46,10 @@
 		<div class="panel-body">
 		   	<a class="rate" id="up">
 		   		<i class="fa fa-thumbs-o-up fa-3x"></i>
-		   		<%= @toilet.upvotes %>
+		   		<span id="up-value"><%= @toilet.upvotes %></span> <!-- need these spans to dynamically update vote numbers -->
 		   	</a>
 		   	<a class="rate" id="down">
-		   		<%= @toilet.downvotes %>
+		   		<span id="down-value"><%= @toilet.downvotes %></span>
 		   		<i class="fa fa-thumbs-o-down fa-3x" id="thumb-down"></i>
 		   	</a>
 		   	<div id="progressbar"></div>
@@ -98,6 +98,8 @@
 				dataType: "json",
 				success: function(toilet) {
 					$("#rating").text(toilet.upvotes - toilet.downvotes);
+					$("#up-value").text(toilet.upvotes);
+					updateProgressBar(toilet.upvotes, toilet.downvotes);
 				}
 			});
 		});
@@ -108,6 +110,8 @@
 				dataType: "json",
 				success: function(toilet) {
 					$("#rating").text(toilet.upvotes - toilet.downvotes);
+					$("#down-value").text(toilet.downvotes);
+					updateProgressBar(toilet.upvotes, toilet.downvotes);
 				}
 			});
 		});
@@ -127,6 +131,18 @@
 			
 		});
 	});
+	
+	function updateProgressBar(up, down) {
+		var toilet_rating_progressbar = (up + down) / 100.0;
+		if (toilet_rating_progressbar == 0.00) {
+			toilet_rating_progressbar = 50;
+		} else {
+			toilet_rating_progressbar = up / toilet_rating_progressbar;
+		}
+		$( "#progressbar" ).progressbar({
+	      value: toilet_rating_progressbar
+	    });
+	}
 	
 	$("#message_body").click(function(){
 		console.log($("#message_body").val().length);
