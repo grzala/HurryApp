@@ -1,8 +1,4 @@
 class Toilet < ActiveRecord::Base
-    def is_valid?
-        if (geox == nil && geoy == nil)
-            return false
-        end
-        return true;
-    end
+    validates :geox, :presence => true;
+    validates :geoy, :presence => true;
 end
