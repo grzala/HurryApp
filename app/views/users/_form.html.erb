@@ -13,31 +13,36 @@
 
 
   <fieldset>
-    <legend>Enter User Details</legend>
-      <div class="field">
-        <%= f.label :name, "Username" %>
-        <%= f.text_field :name, :size => 40 %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <legend>Enter User Details</legend>
       </div>
-
-      <div class="field">
-        <%= f.label :email, "Email" %>
-        <%= f.text_field :email, :size => 40 %>
+      <div class="panel-body">
+        <div class="field">
+          <%= f.label :name, "Username" %>
+          <%= f.text_field :name, :size => 40 %>
+        </div>
+  
+        <div class="field">
+          <%= f.label :email, "Email" %>
+          <%= f.text_field :email, :size => 40 %>
+        </div>
+  
+        <div class="field">
+          <%= f.label :password, "Password" %>
+          <%= f.password_field :password, :size => 40 %>
+        </div>
+  
+        <div class="field">
+          <%= f.label :password_confirmation, "Confirm Password" %>
+          <%= f.password_field :password_confirmation, :size => 40 %>
+        </div>
+  
+        <div class="actions">
+          <%= f.submit %>
+        </div>
       </div>
-
-      <div class="field">
-        <%= f.label :password, "Password" %>
-        <%= f.password_field :password, :size => 40 %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password_confirmation, "Confirm Password" %>
-        <%= f.password_field :password_confirmation, :size => 40 %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-
+    </div>
   </fieldset>
 <% end %>
 </div>

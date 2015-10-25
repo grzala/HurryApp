@@ -81,3 +81,9 @@ body{
 #user-name {
     margin-top: 16px;
 }
+#progressbar .ui-progressbar-value {
+    background-color: #ccc;
+}
+#down {
+    float:right;
+}

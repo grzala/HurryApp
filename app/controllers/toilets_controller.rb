@@ -50,6 +50,7 @@ class ToiletsController < ApplicationController
 		end
 		
 		@comments = Comment.where(:toilet_id => @toilet.id)
+		@comments = Comment.order(date: :desc)
 
 	end
 	

@@ -21,7 +21,24 @@
 		</ul>
 	</div>
 </div>
-<% if !session[:user_id].nil? %>
+<% if session[:user_id].nil? %>
+	<div class="panel panel-default">
+   		<div class=" panel-heading">
+		   	<h4>Rating:</h4>
+		</div>
+		<div class="panel-body">
+		   	<p>Log in to see and do rating!</p>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Comments</h4>
+		</div>
+		<div class="panel-body">
+			<p>Log in to see and write comments!</p>
+		</div>
+	</div>
+<% else %>
    	<div class="panel panel-default">
    		<div class=" panel-heading">
 		   	<h4>Rating: <span id="rating"><%= @toilet.upvotes - @toilet.downvotes %></span></h4>
@@ -29,32 +46,38 @@
 		<div class="panel-body">
 		   	<a class="rate" id="up">
 		   		<i class="fa fa-thumbs-o-up fa-3x"></i>
-		   	</a> 
-		   	There will be progressbar
-		   	<a class="rate" id="down">
-		   		<i class="fa fa-thumbs-o-down fa-3x"></i>
+		   		<%= @toilet.upvotes %>
 		   	</a>
+		   	<a class="rate" id="down">
+		   		<%= @toilet.downvotes %>
+		   		<i class="fa fa-thumbs-o-down fa-3x" id="thumb-down"></i>
+		   	</a>
+		   	<div id="progressbar"></div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>Comments</h4>
+		</div>
+		<div class="panel-body">
+			<div class="panel panel-default">
+				<%= render 'comment_form' %>
+			</div>
+			<% @comments.each do |comment| %>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<% @user = User.find(comment.user_id) %>
+						Comment by: <%= @user.name %>, Time: <%= comment.date %>
+					</div>
+					<div class="panel-body">
+						<%= comment.message %>
+					</div>
+				</div>
+			<% end %>
 		</div>
 	</div>
 <% end %>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4>Comments</h4><!--add comments below -->
-	</div>
-	<div class="panel-body">
-		<p>There will be comments</p>
-		<% @comments.each do |comment| %>
-			<div class="comment">
-				<% @user = User.find(comment.user_id) %>
-				<p>Comment by: <%= @user.name %>, commented at: <%= comment.date %></p>
-				<p><%= comment.message %></p><br />
-			</div>
-		<% end %>
-		
-		
-		<%= render 'comment_form' %>
-	</div>
-</div>
+
 
 </div>
 </div>
@@ -200,6 +223,12 @@
 	    }
 	  });
 	}
+	
+	$(function() {
+    $( "#progressbar" ).progressbar({
+      value: 50 + <%= @toilet.upvotes - @toilet.downvotes %>
+    });
+  });
 </script>
 
 
