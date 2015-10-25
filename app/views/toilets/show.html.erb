@@ -226,7 +226,7 @@
 	
 	$(function() {
     $( "#progressbar" ).progressbar({
-      value: 50 + <%= @toilet.upvotes - @toilet.downvotes %>
+      value: <%= @toilet_rating_progressbar %>
     });
   });
 </script>
