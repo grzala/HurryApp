@@ -59,8 +59,8 @@
 		<div class="panel-heading">
 			<h4>Comments</h4>
 		</div>
-		<div class="panel-body">
-			<div class="panel panel-default">
+		<div class="panel-body" id="comment-container">
+			<div class="panel panel-default" id="comment-form-header">
 				<%= render 'comment_form' %>
 			</div>
 			<% @comments.each do |comment| %>
@@ -128,7 +128,36 @@
 				$("#message_body").val(newText);
 			}
 			$("#characters_left").text(max - $("#message_body").val().length);
-			
+		});
+		
+		$("#new_comment").submit(function(e) {
+			e.preventDefault();
+			if(validateComment()) {
+				var params = {
+					message: $('#new_comment').find('textarea[name="message[body]"]').val(),
+					toilet_id: $('#new_comment').find('input[name="comment[toilet_id]"]').val(),
+					user_id: $('#new_comment').find('input[name="comment[user_id]"]').val(),
+					date: $('#new_comment').find('input[name="comment[date]"]').val()
+				};
+				$.ajax({
+					type: "POST",
+					url: "/comments/create",
+					data: params,
+					dataType: "json",
+					success: function(comment) {
+						$("#comment-container #comment-form-header").after(
+							'<div class="panel panel-default">' +
+							'<div class="panel-heading">' +
+							'Comment by:' + comment.username + ', Time: ' + comment.date + 
+							'</div>' +
+							'<div class="panel-body">' +
+							comment.message +
+							'</div></div>'
+						);
+					}
+				});
+				$('#new_comment').find('textarea[name="message[body]"]').val("");
+			}
 		});
 	});
 	
@@ -144,10 +173,6 @@
 	    });
 	}
 	
-	$("#message_body").click(function(){
-		console.log($("#message_body").val().length);
-	});
-	
 	function validateComment() {
 		//validate contact length on submit
 		var max = 300;
@@ -157,6 +182,7 @@
 			alert("Comment too long or no comment");
 			return false;
 		}
+		return true;
 	}
 
 	//google API

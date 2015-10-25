@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'toilets/:id/:rate' => 'toilets#rate'
   resources :toilets 
   
+  post 'comments/create' => 'comments#create'
+  get 'comments/edit/:id' => 'comments#edit'
   resources :comments
 
   # The priority is based upon order of creation: first created -> highest priority.
