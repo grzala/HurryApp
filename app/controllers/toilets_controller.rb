@@ -49,6 +49,13 @@ class ToiletsController < ApplicationController
 			@coordinates = (Hash[:lat => @Y, :lng => @X, :ref => @toilet.coordinatereferencesystem]) 
 		end
 		
+		@toilet_rating_progressbar = ((@toilet.upvotes + @toilet.downvotes)/100).to_f
+		if @toilet_rating_progressbar == 0
+			@toilet_rating_progressbar = 50
+		else
+			@toilet_rating_progressbar = @toilet.upvotes / @toilet_rating_progressbar
+		end
+		
 		@comments = Comment.where(:toilet_id => @toilet.id)
 		@comments = Comment.order(date: :desc)
 
