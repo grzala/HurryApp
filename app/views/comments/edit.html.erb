@@ -1,0 +1,49 @@
+<div class="edit-form-container">
+<%= form_for(@comment)  do |f| %> <!-- id= edit_comment_id -->
+    <%= f.hidden_field :comment_id, :value => @comment.id %>
+    <%= f.label(:message, :Comment) %><!-- id="message" -->
+    <%= text_area(:message, :body, cols: 35, rows: 3, :value => @comment.message)  %> <!-- id="message_body" -->
+    <p><span id="characters_left">300</span> characters left =>
+    <%= f.submit "Update", id: "comment_submit" %></p><!-- id="comment_submit" -->
+<% end %>
+</div>
+
+<script type="text/javascript">
+    //comments
+    $(document).ready(function() {
+		$("#message_body").keyup(function(){
+			var max = 300;
+			var text = $("#message_body").val();
+			len  = text.length 
+			if (len > max) {
+				var newText = "";
+				for (var i = 0; i < max; i++) {
+					newText += text[i];
+				}
+				$("#message_body").val(newText);
+			}
+			$("#characters_left").text(max - $("#message_body").val().length);
+		});
+		$("form").submit(function() {
+		    if(!validateComment()) {
+		        return false;
+		    }
+		    return true;
+		});
+		
+	});
+    
+    
+    function validateComment() {
+		//validate contact length on submit
+		var max = 300;
+		var text = $("#message_body").val();
+		len = text.length
+		if (len > max || len == 0) {
+			alert("Comment too long or no comment");
+			return false;
+		}
+		return true;
+	}
+    
+</script>

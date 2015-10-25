@@ -68,6 +68,9 @@
 					<div class="panel-heading">
 						<% @user = User.find(comment.user_id) %>
 						Comment by: <%= @user.name %>, Time: <%= comment.date %>
+						<% if session[:user_id] == comment.user_id %>
+							<a href=<%= "/comments/edit/" + comment.id.to_s %>>edit</a>
+						<% end %>
 					</div>
 					<div class="panel-body">
 						<%= comment.message %>
@@ -148,7 +151,8 @@
 						$("#comment-container #comment-form-header").after(
 							'<div class="panel panel-default">' +
 							'<div class="panel-heading">' +
-							'Comment by:' + comment.username + ', Time: ' + comment.date + 
+							'Comment by:' + comment.username + ', Time: ' + comment.date + " " + 
+							'<a href="/comments/edit/' + comment.id + '">edit</a>' +
 							'</div>' +
 							'<div class="panel-body">' +
 							comment.message +

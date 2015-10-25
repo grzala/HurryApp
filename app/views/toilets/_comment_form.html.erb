@@ -7,5 +7,5 @@
     <%= f.label(:message, :Comment) %><!-- id="message" -->
     <%= text_area(:message, :body, cols: 35, rows: 3)  %> <!-- id="message_body" -->
     <p><span id="characters_left">300</span> characters left =>
-    <%= f.submit "Send", id: "comment_submit", :onclick => "return validateComment();" %></p><!-- id="comment_submit" -->
+    <%= f.submit "Send", id: "comment_submit" %></p><!-- id="comment_submit" -->
 <% end %>

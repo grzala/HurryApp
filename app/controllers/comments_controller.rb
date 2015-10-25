@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
                 @comment.save
                 
                 @returnJson = {
+                    :id => @comment.id,
                     :message => @comment.message,
                     :user_id => @comment.user_id,
                     :username => User.find(@comment.user_id).name,
@@ -36,6 +37,26 @@ class CommentsController < ApplicationController
     end
     
     def edit
-      
+        @comment = Comment.find(params[:id])
+        
+        if session[:user_id] != @comment.user_id
+            #no permission
+            redirect_to '/toilets/' + @comment.toilet_id.to_s
+        end
+        
+    end
+    
+    def update
+        @comment = params[:comment]
+        @comment = Comment.find(@comment[:comment_id])
+        @message = params[:message]
+        @message = @message[:body]
+        if session[:user_id] == @comment.user_id
+            # permission
+            @comment.message = @message
+            @comment.save
+        end
+        
+        redirect_to '/toilets/' + @comment.toilet_id.to_s
     end
 end
