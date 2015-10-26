@@ -93,4 +93,35 @@ class ToiletsController < ApplicationController
 			}
 		end
 	end
+	
+	def new
+		if !User.find(session[:user_id]).admin
+			redirect_to root_url
+		end
+		@toilet = Toilet.new
+		@systems = {
+			1 => "WGS84",
+			2 => "OSGB36"
+		}
+	end
+	
+	def create
+		if !User.find(session[:user_id]).admin
+			redirect_to root_url
+		end
+		
+		@params = params[:toilet]
+		@toilet = Toilet.new
+		@params.map do |key, value|
+			@toilet[key] = value
+			if key == :geox || key == :geoy
+				@toilet[key] = value.to_f
+			end
+			if value == ""
+				@toilet[key] = nil
+			end
+		end
+		@toilet.save
+		redirect_to toilet_path(@toilet)
+	end
 end
