@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     def edit
         @comment = Comment.find(params[:id])
         
-        if session[:user_id] != @comment.user_id
+        if session[:user_id] != @comment.user_id 
             #no permission
             redirect_to '/toilets/' + @comment.toilet_id.to_s
         end
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
         @comment = Comment.find(@comment[:comment_id])
         @message = params[:message]
         @message = @message[:body]
-        if session[:user_id] == @comment.user_id
+        if session[:user_id] == @comment.user_id || User.find(session[:user_id]).admin == true
             # permission
             @comment.message = @message
             @comment.save
@@ -52,8 +52,10 @@ class CommentsController < ApplicationController
         respond_to do |format|
             format.js {
                 @comment = Comment.find(params[:id])
-                @comment.destroy
-                render json: {:isDeleted => "true"}
+                if session[:user_id] == @comment.user_id || User.find(session[:user_id]).admin == true
+                    @comment.destroy
+                end
+                render json: {:isDeleted => "is not needed"}
             }
         end
     end

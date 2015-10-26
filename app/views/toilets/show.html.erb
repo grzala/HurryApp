@@ -68,8 +68,10 @@
 					<div class="panel-heading">
 						<% @user = User.find(comment.user_id) %>
 						Comment by: <%= @user.name %>, Time: <%= comment.date %>
-						<% if session[:user_id] == comment.user_id %>
-							<a href=<%= "/comments/edit/" + comment.id.to_s %>>edit</a>
+						<% if session[:user_id] == comment.user_id || User.find(session[:user_id]).admin == true %>
+							<% if session[:user_id] == comment.user_id %>
+								<a href=<%= "/comments/edit/" + comment.id.to_s %>>edit</a>
+							<% end %>
 							<a class="delete-comment-link" data-commentid=<%= comment.id %> href=<%= "comments/delete/" + comment.id.to_s %>>delete</a>
 						<% end %>
 					</div>
