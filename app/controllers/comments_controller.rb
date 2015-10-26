@@ -3,18 +3,6 @@ class CommentsController < ApplicationController
     def create
         respond_to do |format|
             format.js {
-                ###
-               # @comment = Comment.new()
-               # message = params[:message]
-                #message = message["body"]
-               # hidden = params[:comment]
-               # @comment.message = message
-                #@comment.date = hidden["date"]
-               # @comment.user_id = hidden["user_id"]
-               # @comment.toilet_id = hidden["toilet_id"]
-                
-                #@comment.save
-               ###
                 @comment = Comment.new();
                 @comment.message = params[:message]
                 @comment.user_id = params[:user_id]
@@ -58,5 +46,15 @@ class CommentsController < ApplicationController
         end
         
         redirect_to '/toilets/' + @comment.toilet_id.to_s
+    end
+    
+    def delete
+        respond_to do |format|
+            format.js {
+                @comment = Comment.find(params[:id])
+                @comment.destroy
+                render json: {:isDeleted => "true"}
+            }
+        end
     end
 end

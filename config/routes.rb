@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   
   post 'comments/create' => 'comments#create'
   get 'comments/edit/:id' => 'comments#edit'
+  get 'comments/delete/:id' => 'comments#delete'
   resources :comments
 
   # The priority is based upon order of creation: first created -> highest priority.

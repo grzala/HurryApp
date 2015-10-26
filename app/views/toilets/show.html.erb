@@ -64,12 +64,13 @@
 				<%= render 'comment_form' %>
 			</div>
 			<% @comments.each do |comment| %>
-				<div class="panel panel-default">
+				<div class="panel panel-default comment">
 					<div class="panel-heading">
 						<% @user = User.find(comment.user_id) %>
 						Comment by: <%= @user.name %>, Time: <%= comment.date %>
 						<% if session[:user_id] == comment.user_id %>
 							<a href=<%= "/comments/edit/" + comment.id.to_s %>>edit</a>
+							<a class="delete-comment-link" data-commentid=<%= comment.id %> href=<%= "comments/delete/" + comment.id.to_s %>>delete</a>
 						<% end %>
 					</div>
 					<div class="panel-body">
@@ -152,7 +153,6 @@
 							'<div class="panel panel-default">' +
 							'<div class="panel-heading">' +
 							'Comment by:' + comment.username + ', Time: ' + comment.date + " " + 
-							'<a href="/comments/edit/' + comment.id + '">edit</a>' +
 							'</div>' +
 							'<div class="panel-body">' +
 							comment.message +
@@ -162,6 +162,18 @@
 				});
 				$('#new_comment').find('textarea[name="message[body]"]').val("");
 			}
+		});
+		$(".delete-comment-link").click(function(e) {
+			e.preventDefault();
+			var id = $(this).data("commentid");
+			$.ajax({
+				type: "GET",
+				url: "/comments/delete/" + id,
+				dataType: "json",
+				success: function(x) {
+				}
+			});
+			$(this).parent().parent().remove();
 		});
 	});
 	
