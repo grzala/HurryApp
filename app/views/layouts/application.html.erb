@@ -49,6 +49,11 @@
         <li class="active" id="user-name"><i class="fa fa-hand-peace-o"></i> Hello <%= session[:user_name] %></li>
         <li>&nbsp;</li>
         <li><%= link_to '<i class="fa fa-sign-out"></i> Log Out'.html_safe, logout_path, :method => :delete, data: {confirm: "Are you sure?"} %></li>
+       
+        <% if session[:user_admin] == 't'%>
+        <li class="active" id="user-name"><i class="fa fa-hand-peace-o"></i> You are not an admin </li>
+        <% end%>
+        
         <% end %>
         <% if session[:user_id].nil? %>
         <li class="active"><%= link_to_if(@current_user.nil?, '<i class="fa fa-pencil"></i> Register'.html_safe, { controller: "users", action: "new" }) %></li>
