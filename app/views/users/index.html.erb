@@ -1,4 +1,4 @@
-<% if session[:user_id] && User.find(session[:user_id]).admin %>
+<% if session[:user_id] && User.find(session[:user_id]).admin == true %>
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Users</h1>
