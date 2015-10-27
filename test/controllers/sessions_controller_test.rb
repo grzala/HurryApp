@@ -5,21 +5,11 @@ class SessionsControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
-
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get :destroy
-    assert_response :success
-  end
   
   test "should login" do
     grant = users(:one)
-    post :create, name: grant.name, password: 'password'
-    assert_redirected_to root_path
+    post :create, name: grant.name, password: 'passwordtest'
+    assert_redirected_to login_url
     assert_equal grant.id, session[:user_id]
   end
   
