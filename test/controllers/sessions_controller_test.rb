@@ -19,7 +19,7 @@ class SessionsControllerTest < ActionController::TestCase
   test "should login" do
     grant = users(:one)
     post :create, name: grant.name, password: 'password'
-    assert_redirected_to admin_url
+    assert_redirected_to root_path
     assert_equal grant.id, session[:user_id]
   end
   
@@ -31,7 +31,7 @@ class SessionsControllerTest < ActionController::TestCase
   
   test "should logout" do
     delete :destroy
-    assert_redirected_to store_url
+    assert_redirected_to root_url
   end
 
 end

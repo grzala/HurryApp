@@ -1,17 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  belongs_to: MyString
   toilet_id: 1
-  has_one: MyString
   user_id: 1
   message: MyString
   date: 2015-10-24 11:40:12
 
 two:
-  belongs_to: MyString
   toilet_id: 1
-  has_one: MyString
   user_id: 1
   message: MyString
   date: 2015-10-24 11:40:12
