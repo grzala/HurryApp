@@ -1,4 +1,4 @@
-calculating data...
+<span id="calculating">calculating data or waiting for locationing permission...</span>
 <script type="text/javascript">
 
     function initMap(){
@@ -11,7 +11,10 @@ calculating data...
                     lng: position.coords.longitude
                 };
                 getToilets(pos);
-            }, function() {alert("error")});
+            }, function() {
+                console.log("error")
+                $("#calculating").text("Allow browser locationing to use this page")
+            });
         };
     }
     
