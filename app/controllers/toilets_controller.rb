@@ -95,7 +95,7 @@ class ToiletsController < ApplicationController
 	end
 	
 	def new
-		if !User.find(session[:user_id]).admin
+		if !session[:user_id] || !User.find(session[:user_id]).admin
 			redirect_to root_url
 		end
 		@toilet = Toilet.new
@@ -108,7 +108,7 @@ class ToiletsController < ApplicationController
 	def create
 		if !User.find(session[:user_id]).admin
 			redirect_to root_url
-		end
+		else
 		
 		@params = params[:toilet]
 		@toilet = Toilet.new
@@ -123,5 +123,31 @@ class ToiletsController < ApplicationController
 		end
 		@toilet.save
 		redirect_to toilet_path(@toilet)
+		
+		end
+	end
+	
+	def delete
+		if !session[:user_id] || !User.find(session[:user_id]).admin
+			redirect_to root_url
+		else
+		
+		@toilet = Toilet.find(params[:id])
+		@votes = Vote.where(:toilet_id => @toilet.id)
+		@comments = Comment.where(:toilet_id => @toilet.id)
+		
+		@votes.all do |vote|
+			vote.destroy
+		end
+		
+		@comments.all do |comment|
+			comment.destroy
+		end
+		
+		@toilet.destroy
+		
+		redirect_to root_url
+		
+		end
 	end
 end
