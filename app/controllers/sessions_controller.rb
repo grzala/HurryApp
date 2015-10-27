@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	if @current_user = User.authenticate(params[:name], params[:password])
 		session[:user_id] = @current_user.id
 		session[:user_name] = @current_user.name
-		redirect_to root_path
+		redirect_to root_url
 	else
 		redirect_to login_url, :alert => "Username or password is invalid"
 	end

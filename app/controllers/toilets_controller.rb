@@ -64,33 +64,37 @@ class ToiletsController < ApplicationController
 	end
 	
 	def rate
-		@toilet = Toilet.find(params[:id])
-		respond_to do |format|
-			format.html { redirect_to(toilet_path(@toilet)) }
-			format.json {
-				if !session[:user_id].nil?
-					
-					@votes = Vote.all
-					@users_voted = []
-					@votes.each do |vote|
-						if vote.toilet_id == @toilet.id
-							@users_voted << vote.user_id
-						end	
-					end
-					if !@users_voted.include?(session[:user_id]) #has the user voted for this toilet?
-						if params[:rate] == "up"
-							@toilet.upvotes = @toilet.upvotes + 1
-						elsif params[:rate] == "down"
-							@toilet.downvotes = @toilet.downvotes + 1
+		if user_exist?
+			@toilet = Toilet.find(params[:id])
+			respond_to do |format|
+				format.html { redirect_to(toilet_path(@toilet)) }
+				format.json {
+					if !session[:user_id].nil?
+						
+						@votes = Vote.all
+						@users_voted = []
+						@votes.each do |vote|
+							if vote.toilet_id == @toilet.id
+								@users_voted << vote.user_id
+							end	
 						end
-						@toilet.save
-						@v = Vote.new(:toilet_id => @toilet.id, :user_id => session[:user_id])
-						@v.save
+						if !@users_voted.include?(session[:user_id]) #has the user voted for this toilet?
+							if params[:rate] == "up"
+								@toilet.upvotes = @toilet.upvotes + 1
+							elsif params[:rate] == "down"
+								@toilet.downvotes = @toilet.downvotes + 1
+							end
+							@toilet.save
+							@v = Vote.new(:toilet_id => @toilet.id, :user_id => session[:user_id])
+							@v.save
+						end
 					end
-				end
-				
-				render json: @toilet
-			}
+					
+					render json: @toilet
+				}
+			end
+		else
+			redirect_to login_url, :alert => "You have to login!"
 		end
 	end
 	
