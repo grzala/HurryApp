@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
 
+  post 'users/permissions/:id' => 'users#permissions'
   resources :users
   
   resources :entries, defaults: { format: 'js' }

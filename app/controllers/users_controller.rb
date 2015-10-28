@@ -4,13 +4,18 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if !user_exist? || !User.find(session[:user_id]).admin 
+      redirect_to root_url
+    end
     @users = User.all
   end
 
+
+  #We don't need show, edit and update methods, we won't be doing that
   # GET /users/1
   # GET /users/1.json
-  def show
-  end
+  #def show
+  #end
 
   # GET /users/new
   def new
@@ -18,8 +23,8 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /users
   # POST /users.json
@@ -38,17 +43,17 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+ # def update
+  #  respond_to do |format|
+   #   if @user.update(user_params)
+    #    format.html { redirect_to @user, notice: 'User was successfully updated.' }
+     #   format.json { render :show, status: :ok, location: @user }
+      #else
+       # format.html { render :edit }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
+    #  end
+    #end
+#  end
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -57,6 +62,19 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def permissions
+    if user_exist? && User.find(session[:user_id]).admin
+      @user = User.find(params[:id])
+      connection = ActiveRecord::Base.connection
+      @set = @user.admin ? "false" : "true"
+      #switch permissions
+      connection.execute("UPDATE users SET admin=" + @set + " WHERE id=" + @user.id.to_s + ";") #won't work the "classic" way
+      redirect_to users_url
+    else
+      redirect_to root_url
     end
   end
 
