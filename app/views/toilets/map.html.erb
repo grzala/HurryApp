@@ -5,62 +5,62 @@
 <%else%>
 <div class="col-xs-12" id="down"><div><div>
 <% end%>
-  
-      <h2>Bootstrap Google Maps Demo</h2>
-      
+
+      <h2></h2><!-- some sort of title? -->
       <!-- item list -->
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="/toilets/closest">Take me to the closest toilet!</a></div>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-        Aliquam in felis sit amet augue.</p>
+      <% if user_exist? && User.find(session[:user_id]).admin %>
+        <div class="panel panel-default">
+          <div class="panel-heading">Administrator Options</div>
+        </div>
+        <p>
+          <a href ="/users">Browse Users, Grant and revoke administrator permissions, delete users.</a><br />
+          <a href="/toilets/new">Add a new Toilet to the database.</a>
+        </p>
+      <% end %>
       
       <hr>
       
       <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Item heading</a></div>
+        <div class="panel-heading">How To use HurryApp</div>
       </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-        Aliquam in felis sit amet augue.</p>
-      
-      <hr>
-      
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Item heading</a></div>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-        Aliquam in felis sit amet augue.</p>
-      
-      <hr>
-      
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="">Item heading</a></div>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-        Aliquam in felis sit amet augue.</p>
-      
-      <hr>
-      <!-- /item list -->
-      
       <p>
-      <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a>
+        Click the nearest toilet link on the bar above to find the toilet closest to your location, or use the map on the right to 
+        find the toilet of your interest. Register and log in to see the ratings and comments of toilets. To find the closest toilets or
+        directions to specific toilets <b>you must enable locationing either in your browser, or in your smartphone settings</b>.
       </p>
       
-      <hr> 
-        
+      <hr>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">What is a Radar Key?</a></div>
+      </div>
       <p>
-      <a href="http://bootply.com" target="_ext" class="center-block btn btn-primary">More Bootstrap Snippets on Bootply</a>
+        Radar Key is a key that can be used to access public toilets which are closed due to various reasons.
+        Many toilets listed as requiring the Radar Key, may in fact only be required during certain hours (for example when 
+        the toilet is closed for the night).
+        You can buy a Radar Key on the Internet.
+        <a href="http://www.bbc.co.uk/news/blogs-ouch-22602836">Find out more about Radar Key.</a>
       </p>
-        
-      <hr>      
+      
+      <hr>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">You know of a toilet which is not listed?</a></div>
+      </div>
+      <p>
+        If you happen to know about a location and details of a toilet, which is not available in our app, let us know. Write and email
+        to us or to any of the moderators (We do not have a contact email yet and neither do we have any moderators).
+      </p>
+      
+      <hr>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="">Help make the experience with Hurry App better</a></div>
+      </div>
+      <p>
+        If you use our app regularly, register, rate and leave comments. Your opinions and influence will help other users and 
+        improve the website and community. If you like what you get, tell yout friends about us.
+      </p>
 
     </div>
     <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
