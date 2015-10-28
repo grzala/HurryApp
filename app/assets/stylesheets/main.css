@@ -93,3 +93,6 @@ body{
 #down {
     float:right;
 }
+#fb-link:hover {
+    background-color: inherit;
+}

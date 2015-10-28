@@ -15,7 +15,7 @@
 
   <tbody>
     <% @users.each do |user| %>
-    <% @message = !user.admin ? "Grant Admin Permissions" : "Revert Admin Permissions" %>
+    <% @message = !user.admin ? "Grant Admin Permissions" : "Revoke Admin Permissions" %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
