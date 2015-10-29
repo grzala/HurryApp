@@ -12,7 +12,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h4>Toilet Information</h4> 
-		<% if session[:user_id] && User.find(session[:user_id]).admin %>
+		<% if user_exist? && User.find(session[:user_id]).admin %>
 			<a <%= 'href=/toilets/delete/' + @toilet.id.to_s %>>delete</a>
 		<% end %>
 	</div>

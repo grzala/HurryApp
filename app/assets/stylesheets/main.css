@@ -85,7 +85,9 @@ body{
 }
 
 #user-name {
-    margin-top: 16px;
+    position:relative;
+    display: block;
+    padding: 15px 15px 15px;
 }
 #progressbar .ui-progressbar-value {
     background-color: #ccc;

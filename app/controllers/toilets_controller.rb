@@ -134,7 +134,7 @@ class ToiletsController < ApplicationController
 	end
 	
 	def delete
-		if !session[:user_id] || !User.find(session[:user_id]).admin
+		if !user_exist? || !User.find(session[:user_id]).admin
 			redirect_to root_url
 		else
 		

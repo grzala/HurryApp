@@ -44,7 +44,11 @@
         <li class="active"><a href="/toilets/closest"><i class="fa fa-map-signs"></i> Nearest toilet</a></li>
         <% if user_exist? %>
           <li class="active" id="user-name"><i class="fa fa-hand-peace-o"></i> Hello <%= session[:user_name] %></li>
-          <li>&nbsp;</li>
+          <% if User.find(session[:user_id]).admin %>
+            <li><%= link_to '<i class="fa fa-user-md"></i> Manage Users'.html_safe, controller: "users", action: "index" %></li>
+            <li><%= link_to '<i class="fa fa-plus"></i><i class="fa fa-map-marker"></i> Add toilet'.html_safe, controller: "toilets", action: "new" %> </li>
+            <li><%= link_to '<i class="fa fa-list-ol"></i> List Toilets'.html_safe, controller: "toilets", action: "index" %></li>
+          <% end %>
           <li><%= link_to '<i class="fa fa-sign-out"></i> Log Out'.html_safe, logout_path, :method => :delete, data: {confirm: "Are you sure?"} %></li>
         <% else %>
           <li><%= link_to '<i class="fa fa-sign-in"></i> Log In'.html_safe, controller: "sessions", action: "create" %></li>
