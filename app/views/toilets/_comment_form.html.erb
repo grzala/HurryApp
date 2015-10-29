@@ -1,12 +1,12 @@
-<!-- by Mikolaj Panasiuk -->
+<!-- by Mikolaj Panasiuk, style Marcel Zak-->
 <%= form_for(Comment.new)  do |f| %> <!-- id= new_comment -->
     <%= f.hidden_field :toilet_id, :value => @toilet.id %>
     <%= f.hidden_field :user_id, :value => session[:user_id] %>
     <%= f.hidden_field :date, :value => Time.now %>
 
 
-    <%= f.label(:message, :Comment) %><!-- id="message" -->
-    <%= text_area(:message, :body, cols: 35, rows: 3)  %> <!-- id="message_body" -->
+    <%= f.label(:message, :Comment, id:"comment_header" ) %><!-- id="message" -->
+    <%= text_area(:message, :body)  %> <!-- id="message_body" -->
     <p><span id="characters_left">300</span> characters left =>
     <%= f.submit "Send", id: "comment_submit" %></p><!-- id="comment_submit" -->
 <% end %>

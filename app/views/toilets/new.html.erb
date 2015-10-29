@@ -1,91 +1,92 @@
-<!-- by Mikolaj Panasiuk -->
-<%= form_for(@toilet) do |f| %>
-
-  <fieldset>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <legend>Enter Toilet Details</legend>
-      </div>
-      <div class="panel-body">
-        <div class="field">
-          <%= f.label :extractdate, "Date (cannot be changed)" %>
-          <%= f.text_field :geox, :value => Time.now, :readonly => true %>
-        </div>
-        <div class="field">
-          <%= f.label :coordinatereferencesystem, "Coordinate System" %>
-          <%= f.collection_select :coordinatereferencesystem, @systems, :last, :last %>
-        </div>
-        <div class="field">
-          <%= f.label :geox, "X Coordinate" %>
-          <%= f.text_field :geox %>
-        </div>
-        <div class="field">
-          <%= f.label :geoy, "Y Coordinate" %>
-          <%= f.text_field :geoy %>
-        </div>
-        <div class="field">
-          <%= f.label :locationtext, "Short location Description" %>
-          <%= f.text_field :locationtext %>
-        </div>
-        <div class="field">
-          <%= f.label :organisationlabel, "City/Council/Organisation" %>
-          <%= f.text_field :organisationlabel %>
-        </div>
-        <div class="field">
-          <%= f.label :category, "Category (male, female, disabled...)" %>
-          <%= f.text_field :category %>
-        </div>
-        <div class="field">
-          <%= f.label :babychange, "Baby Change (YES / NO)" %>
-          <%= f.text_field :babychange %>
-        </div>
-        <div class="field">
-          <%= f.label :familytoilet, "Family Toilet (YES / NO)" %>
-          <%= f.text_field :familytoilet %>
-        </div>
-        <div class="field">
-          <%= f.label :fulltimestaffing, "Full Time Staffing (YES / NO)" %>
-          <%= f.text_field :fulltimestaffing %>
-        </div>
-        <div class="field">
-          <%= f.label :chargeamount, "Charge" %>
-          <%= f.text_field :chargeamount %>
-        </div>
-        <div class="field">
-          <%= f.label :openinghours, "Opening hours" %>
-          <%= f.text_field :openinghours %>
-        </div>
-        <div class="field">
-          <%= f.label :managedby, "Managed By" %>
-          <%= f.text_field :managedby %>
-        </div>
-        <div class="field">
-          <%= f.label :reportemail, "Report Email" %>
-          <%= f.text_field :reportemail %>
-        </div>
-        <div class="field">
-          <%= f.label :reporttel, "Report Telephone" %>
-          <%= f.text_field :reporttel %>
-        </div>
-        <div class="field">
-          <%= f.label :postcode, "Post Code" %>
-          <%= f.text_field :postcode %>
-        </div>
-        <div class="field">
-          <%= f.label :streetaddress, "Street" %>
-          <%= f.text_field :streetaddress %>
-        </div>
-        <div class="field">
-          <%= f.label :radarkeyneeded, "Radar Key (YES, NO)" %>
-          <%= f.text_field :radarkeyneeded %>
-        </div>
-
+<!-- by Mikolaj Panasiuk, style by Marcel Zak-->
+<div class="container-fluid" id="main"><div class="row"><div class="col-md-4 col-md-offset-4">
+  <%= form_for(@toilet) do |f| %>
   
-        <div class="actions">
-          <%= f.submit %>
+    <fieldset>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <legend>Enter Toilet Details</legend>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <%= f.label :extractdate, "Date (cannot be changed)" %>
+            <%= f.text_field :geox, :value => Time.now, :readonly => true %>
+          </div>
+          <div class="field">
+            <%= f.label :coordinatereferencesystem, "Coordinate System" %>
+            <%= f.collection_select :coordinatereferencesystem, @systems, :last, :last %>
+          </div>
+          <div class="field">
+            <%= f.label :geox, "X Coordinate" %>
+            <%= f.text_field :geox %>
+          </div>
+          <div class="field">
+            <%= f.label :geoy, "Y Coordinate" %>
+            <%= f.text_field :geoy %>
+          </div>
+          <div class="field">
+            <%= f.label :locationtext, "Short location Description" %>
+            <%= f.text_field :locationtext %>
+          </div>
+          <div class="field">
+            <%= f.label :organisationlabel, "City/Council/Organisation" %>
+            <%= f.text_field :organisationlabel %>
+          </div>
+          <div class="field">
+            <%= f.label :category, "Category (male, female, disabled...)" %>
+            <%= f.text_field :category %>
+          </div>
+          <div class="field">
+            <%= f.label :babychange, "Baby Change (YES / NO)" %>
+            <%= f.text_field :babychange %>
+          </div>
+          <div class="field">
+            <%= f.label :familytoilet, "Family Toilet (YES / NO)" %>
+            <%= f.text_field :familytoilet %>
+          </div>
+          <div class="field">
+            <%= f.label :fulltimestaffing, "Full Time Staffing (YES / NO)" %>
+            <%= f.text_field :fulltimestaffing %>
+          </div>
+          <div class="field">
+            <%= f.label :chargeamount, "Charge" %>
+            <%= f.text_field :chargeamount %>
+          </div>
+          <div class="field">
+            <%= f.label :openinghours, "Opening hours" %>
+            <%= f.text_field :openinghours %>
+          </div>
+          <div class="field">
+            <%= f.label :managedby, "Managed By" %>
+            <%= f.text_field :managedby %>
+          </div>
+          <div class="field">
+            <%= f.label :reportemail, "Report Email" %>
+            <%= f.text_field :reportemail %>
+          </div>
+          <div class="field">
+            <%= f.label :reporttel, "Report Telephone" %>
+            <%= f.text_field :reporttel %>
+          </div>
+          <div class="field">
+            <%= f.label :postcode, "Post Code" %>
+            <%= f.text_field :postcode %>
+          </div>
+          <div class="field">
+            <%= f.label :streetaddress, "Street" %>
+            <%= f.text_field :streetaddress %>
+          </div>
+          <div class="field">
+            <%= f.label :radarkeyneeded, "Radar Key (YES, NO)" %>
+            <%= f.text_field :radarkeyneeded %>
+          </div>
+  
+    
+          <div class="actions">
+            <%= f.submit %>
+          </div>
         </div>
       </div>
-    </div>
-  </fieldset>
-<% end %>
+    </fieldset>
+  <% end %>
 </div>

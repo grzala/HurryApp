@@ -21,3 +21,5 @@ class ApplicationController < ActionController::Base
   helper_method :mobile?
  
 end
+
+# author Marcel Zak

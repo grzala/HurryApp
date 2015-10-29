@@ -1,22 +1,31 @@
-<div>
-  <h1>Login</h1>
-  <% if flash[:alert] %>
-    <p id="notice"><%= flash[:alert] %></p>
-  <% end %>
-  <%= form_tag do %>
-    <fieldset>
+<!--created Grant Christie, style by Marcel Zak -->
+<div class="container-fluid" id="main"><div class="row"><div class="col-md-2 col-md-offset-5">
+  <div class="panel panel-default">
+    <% if flash[:alert] %>
+      <div class="panel-heading" id="notice">
+        <legend><%= flash[:alert] %></legend>
+      </div>
+    <% else %>
+      <div class="panel-heading">  
       <legend>Please Log In</legend>
-      <div>
-        <%= label_tag :name, 'Name:' %>
-        <%= text_field_tag :name, params[:name] %>
       </div>
-      <div>
-        <%= label_tag :password, 'Password:' %>
-        <%= password_field_tag :password, params[:password] %>
+    <% end %>
+    <%= form_tag do %>
+      <div class="panel-body">
+        <fieldset>
+          <div class="login-labels">
+            <%= label_tag :name, 'Name:' %>
+            <%= text_field_tag :name, params[:name] %>
+          </div>
+          <div class="login-labels">
+            <%= label_tag :password, 'Password:' %>
+            <%= password_field_tag :password, params[:password] %>
+          </div>
+          <div>
+            <%= submit_tag "Login" %>
+          </div>
+        </fieldset>
       </div>
-      <div>
-        <%= submit_tag "Login" %>
-      </div>
-    </fieldset>
-  <% end %>
+    <% end %>
+  </div>
 </div>

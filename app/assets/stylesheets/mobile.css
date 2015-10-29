@@ -6,7 +6,12 @@ in your HTML file.
 
 license: MIT
 author: bootply.com
+
+
+changed by Marcel Zak
+
 */
+
 
 
 html,body{
@@ -86,6 +91,26 @@ body{
 #progressbar .ui-progressbar-value {
     background-color: #ccc;
 }
-#down {
+#thumb-down {
     float:right;
 }
+
+#fb-link:hover {
+    background-color: inherit;
+}
+
+#comment_header {
+    margin: 10px 100% 15px 20px;
+}
+
+#message_body {
+    margin: 0px 5% 15px 5%;
+    width: 90%;
+    height: 10%;
+    resize: none;
+}
+
+.new_comment {
+    background: #E9F7F7;
+}
+

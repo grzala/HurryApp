@@ -49,13 +49,13 @@
 		   	<h4>Rating: <span id="rating"><%= @toilet.upvotes - @toilet.downvotes %></span></h4>
 		</div>
 		<div class="panel-body">
-		   	<a class="rate" id="up">
+		   	<a class="rate" id="thumb-up">
 		   		<i class="fa fa-thumbs-o-up fa-3x"></i>
 		   		<span id="up-value"><%= @toilet.upvotes %></span> <!-- need these spans to dynamically update vote numbers -->
 		   	</a>
-		   	<a class="rate" id="down">
+		   	<a class="rate" id="thumb-down">
 		   		<span id="down-value"><%= @toilet.downvotes %></span>
-		   		<i class="fa fa-thumbs-o-down fa-3x" id="thumb-down"></i>
+		   		<i class="fa fa-thumbs-o-down fa-3x"></i>
 		   	</a>
 		   	<div id="progressbar"></div>
 		</div>
