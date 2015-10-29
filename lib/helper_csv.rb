@@ -1,3 +1,4 @@
+#by Mikolaj Panasiuk
 require 'csv'
 
 module Helper_CSV

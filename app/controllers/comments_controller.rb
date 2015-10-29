@@ -1,3 +1,4 @@
+#by Mikolaj Panasiuk
 class CommentsController < ApplicationController
     
     def create

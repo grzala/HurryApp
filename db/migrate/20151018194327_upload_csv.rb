@@ -1,3 +1,4 @@
+#by Mikolaj Panasiuk
 require File.expand_path('lib/helper_csv.rb')
 
 include Helper_CSV

@@ -1,3 +1,5 @@
+#by Mikolaj Panasiuk, Grant Christie and Marcel Zak
+
 Rails.application.routes.draw do
 
   controller :sessions do

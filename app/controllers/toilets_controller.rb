@@ -1,3 +1,5 @@
+#by Mikolaj Panasiuk
+
 class ToiletsController < ApplicationController
 	def index
 		@toilets = Toilet.all
