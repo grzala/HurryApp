@@ -1,22 +1,18 @@
+#By Grant Christie
+
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
     @input_attributes = {
-      :name => "bob",
-      :email => "bob@test.com",
+      :name => "grant",
+      :email => "grant@test.com",
       :password => "password",
       :password_confirmation => "password",
       :admin => "false"
     }
     
     @user = users(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
   end
 
   test "should get new" do
@@ -31,26 +27,4 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test "should show user" do
-    get :show, id: @user
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @user
-    assert_response :success
-  end
-
-  test "should update user" do
-    put :update, :id => @user.to_param, :user => @input_attributes
-    assert_redirected_to user_path
-  end
-
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
-      delete :destroy, id: @user
-    end
-
-    assert_redirected_to users_path
-  end
 end

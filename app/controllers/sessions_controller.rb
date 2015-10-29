@@ -1,3 +1,5 @@
+#By Grant Christie
+
 class SessionsController < ApplicationController
   def new
   end
