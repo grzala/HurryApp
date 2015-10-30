@@ -102,7 +102,7 @@
 	
 	$(document).ready(function() {
 		//rating
-		$("#up").click(function(){
+		$("#thumb-up").click(function(){
 			$.ajax({
 				type: "GET",
 				url: "/toilets/" + toiletid + "/up",
@@ -114,7 +114,7 @@
 				}
 			});
 		});
-		$("#down").click(function(){
+		$("#thumb-down").click(function(){
 			$.ajax({
 				type: "GET",
 				url: "/toilets/" + toiletid + "/down",
